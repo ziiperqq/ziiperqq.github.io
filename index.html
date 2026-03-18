@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未来科技节 - 探索无限可能</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+
+        /* 页面整体样式 */
+        body {
+            line-height: 1.6;
+            color: #fff;
+            background-color:#f3e5f5;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background-color: #1a73e8;
+            color: white;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        /* 响应式导航（移动端适配） */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* 英雄区样式（首页横幅） */
+        .hero {
+            background: linear-gradient(#5a189a, #5a189a), 
+                        url('11.png');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0d5bba;
+            transform: translateY(-3px);
+        }
+
+        /* 内容容器（统一宽度和边距） */
+        .container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 5%;
+        }
+
+        /* 节会介绍模块 */
+        .about {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #1a73e8;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #1a73e8;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            transition: transform 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .about-card h3 {
+            color: #1a73e8;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* 活动日程模块 */
+        .schedule {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 5rem;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .schedule-table th {
+            background-color: #f1f5ff;
+            color: #1a73e8;
+        }
+
+        .schedule-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* 精彩看点模块 */
+        .highlights {
+            margin-bottom: 5rem;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .highlight-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .highlight-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .highlight-content {
+            padding: 1.5rem;
+        }
+
+        .highlight-content h3 {
+            color: #1a73e8;
+            margin-bottom: 1rem;
+        }
+
+        /* 报名入口模块 */
+        .register {
+            background: linear-gradient(135deg, #1a73e8 0%, #0d5bba 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 5rem;
+            border-radius: 10px;
+        }
+
+        .register h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .register-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* 移动端适配（屏幕宽度小于768px） */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #1a73e8;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                display: none;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .schedule {
+                padding: 2rem 1rem;
+            }
+
+            .register-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">未来科技节</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">节会介绍</a></li>
+                <li><a href="#schedule">活动日程</a></li>
+                <li><a href="#highlights">精彩看点</a></li>
+                <li><a href="#register">立即报名</a></li>
+            </ul>
+            <div class="menu-toggle">☰</div>
+        </div>
+    </nav>
+
+    <!-- 英雄区（首页横幅） -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>2025 未来科技节</h1>
+            <p>探索前沿科技，解锁未来无限可能！本次科技节汇聚人工智能、元宇宙、量子计算等领域的顶尖专家与创新成果，邀您共赴一场科技盛宴。</p>
+            <a href="#register" class="btn">立即报名参与</a>
+        </div>
+    </section>
+
+    <!-- 内容容器 -->
+    <div class="container">
+        <!-- 节会介绍 -->
+        <section class="about" id="about">
+            <h2 class="section-title">节会介绍</h2>
+            <p>2025未来科技节以“科技赋能未来，创新改变世界”为主题，为期3天，涵盖主题演讲、技术展览、创客大赛、互动体验四大板块，<br>旨在搭建科技交流平台，普及前沿科技知识，激发青少年创新思维。</p>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3>活动时间</h3>
+                    <p>2025年8月15日 - 8月17日</p>
+                    <p>每日9:00 - 18:00</p>
+                </div>
+                <div class="about-card">
+                    <h3>活动地点</h3>
+                    <p>中国·上海国际会展中心</p>
+                    <p>浦东新区龙阳路2345号</p>
+                </div>
+                <div class="about-card">
+                    <h3>参与人群</h3>
+                    <p>科技爱好者、在校学生、企业代表</p>
+                    <p>科研工作者、教育工作者</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 活动日程 -->
+        <section class="schedule" id="schedule">
+            <h2 class="section-title">活动日程</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>活动内容</th>
+                        <th>地点</th>
+                        <th>主讲人/负责人</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>8月15日 9:00-11:00</td>
+                        <td>开幕式 + 前沿科技主题演讲</td>
+                        <td>主会场</td>
+                        <td>中科院院士 张教授</td>
+                    </tr>
+                    <tr>
+                        <td>8月15日 13:00-17:00</td>
+                        <td>人工智能技术展览</td>
+                        <td>A区展厅</td>
+                        <td>各大科技企业代表</td>
+                    </tr>
+                    <tr>
+                        <td>8月16日 9:00-12:00</td>
+                        <td>青少年创客大赛</td>
+                        <td>B区竞赛区</td>
+                        <td>组委会评委团</td>
+                    </tr>
+                    <tr>
+                        <td>8月16日 14:00-16:00</td>
+                        <td>元宇宙互动体验</td>
+                        <td>C区体验区</td>
+                        <td>VR/AR技术团队</td>
+                    </tr>
+                    <tr>
+                        <td>8月17日 9:00-15:00</td>
+                        <td>量子计算科普讲座 + 闭幕式</td>
+                        <td>主会场</td>
+                        <td>李博士 / 组委会主席</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 精彩看点 -->
+        <section class="highlights" id="highlights">
+            <h2 class="section-title">精彩看点</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <img src="https://images.unsplash.com/photo-1617097431724-1f72a687b976?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="人工智能展示" class="highlight-img">
+                    <div class="highlight-content">
+                        <h3>AI智能交互体验</h3>
+                        <p>近距离接触最新的人工智能产品，与智能机器人对话、体验AI绘画/写作，感受科技的温度。</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <img src="https://images.unsplash.com/photo-1638307719770-8893b6e25f96?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="元宇宙体验" class="highlight-img">
+                    <div class="highlight-content">
+                        <h3>元宇宙沉浸式体验</h3>
+                        <p>戴上VR设备，进入虚拟的元宇宙世界，体验虚拟社交、数字艺术创作，提前感受未来生活。</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <img src="https://images.unsplash.com/photo-1584970125669-5c09cf47ce45?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="创客大赛" class="highlight-img">
+                    <div class="highlight-content">
+                        <h3>青少年创客大赛</h3>
+                        <p>观看青少年团队展示自主研发的科技作品，从智能小车到环保发明，见证未来创新力量。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 报名入口 -->
+        <section class="register" id="register">
+            <h2>立即报名参与科技节</h2>
+            <p>填写下方表单，免费获取入场资格，还有机会获得限量科技周边！</p>
+            <div class="register-form">
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" id="name" placeholder="请输入您的姓名" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">手机号码</label>
+                    <input type="tel" id="phone" placeholder="请输入您的手机号码" required>
+                </div>
+                <div class="form-group">
+                    <label for="identity">身份类型</label>
+                    <select id="identity" required>
+                        <option value="">请选择您的身份</option>
+                        <option value="student">在校学生</option>
+                        <option value="teacher">教育工作者</option>
+                        <option value="enterprise">企业代表</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">意向参与日期</label>
+                    <input type="date" id="date" required>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">提交报名</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 未来科技节 版权所有</p>
+            <p>联系电话：400-123-4567 | 邮箱：techfest@example.com</p>
+            <p>地址：上海市浦东新区龙阳路2345号国际会展中心</p>
+        </div>
+    </footer>
+
+    <!-- 简单的JS交互（移动端菜单） -->
+    <script>
+        // 移动端导航菜单切换
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // 报名表单提交提示
+        const registerForm = document.querySelector('.register-form');
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // 阻止默认提交行为
+            alert('报名信息提交成功！我们将尽快与您联系，请注意查收短信通知。');
+            registerForm.reset(); // 重置表单
+        });
+
+        // 平滑滚动（点击导航链接）
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // 偏移量避免被导航栏遮挡
+                    behavior: 'smooth'
+                });
+                // 移动端点击后关闭菜单
+                if (window.innerWidth <= 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
